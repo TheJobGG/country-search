@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'wouter'
-import { IconMoon } from "../components/Icons"
+import { IconMoon, IconSun } from "../components/Icons"
 
 function Header() {
   const [darkMode, setDarkMode] = useState(true)
@@ -25,8 +25,17 @@ function Header() {
       <div className="container flex justify-between">
         <Link href='/'> <h1 className="font-bold">Where in the world?</h1> </Link>
         <button onClick={toggleDarkMode} className="flex  items-center gap-4">
-          <IconMoon className='fill-c-very-dark-blue-text dark:fill-c-very-light-gray-bg -rotate-[30deg]' />
-          <span>Dark Mode</span>
+          {
+            darkMode
+              ? <IconSun className='fill-c-very-dark-blue-text -rotate-[30deg]' />
+              : <IconMoon className='fill-c-very-light-gray-bg' />
+          }
+
+          {
+            darkMode
+              ? <span>Light Mode</span>
+              : <span>Dark Mode</span>
+          }
         </button>
       </div>
     </div>
