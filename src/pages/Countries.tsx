@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { useState } from "react";
 
 import { Country, Region } from '../../types.d'
-import { getCountries } from '../../services/countries-info'
+import { getCountriesByRegion } from '../../services/countries-info'
 import CountryCard from "../components/CountryCard";
 
 import { IconSearch } from "../components/Icons";
@@ -13,7 +13,7 @@ function Countries() {
   const [searchInput, setSearchInput] = useState("")
   const [selectedRegion, setSelectedRegion] = useState(Region.Africa)
 
-  const { data, error, isLoading } = useSWR<Country[]>(`countries_${selectedRegion}`, () => getCountries(selectedRegion))
+  const { data, error, isLoading } = useSWR<Country[]>(`countries_${selectedRegion}`, () => getCountriesByRegion(selectedRegion))
 
   const filteredCountries = data?.filter((country: Country) =>
     country.name.common.toLowerCase().includes(searchInput.toLowerCase())
