@@ -5,15 +5,10 @@ import LoadingFallback from './LoadingFallback'
 import { Country } from '../../types'
 
 function CountryCard(props: { country: Country }) {
-  const { country: { flags: { png, alt }, name: { official, common }, population, region, capital } } = props
-
-  const handleClick = () => {
-
-  }
-
+  const { country: { flags: { png, alt }, name: { official }, population, region, capital, cca3 } } = props
 
   return (
-    <Link href={`/country/${common}`} className='bg-c-white dark:bg-c-dark-blue-elements dark:text-c-white rounded-xl shadow-sm overflow-hidden mx-auto w-full max-w-[350px] cursor-pointer' onClick={handleClick}>
+    <Link href={`/country/${cca3}`} className='bg-c-white dark:bg-c-dark-blue-elements dark:text-c-white rounded-xl shadow-sm overflow-hidden mx-auto w-full max-w-[350px] cursor-pointer'>
       <LazyLoadImage src={png} alt={alt} placeholder={<LoadingFallback />} className='w-full h-48 object-cover' />
 
       <div className='py-7 px-5'>
