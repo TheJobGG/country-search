@@ -6,19 +6,25 @@ import LoadingFallback from "../components/LoadingFallback"
 import { IconBackArrow } from "../components/Icons";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Country, Currencies } from "../../types";
+import BorderCountries from "../components/BorderCountries";
 
-function CountryDetail(props: {
-  params: { country: string }
-}) {
+function CountryDetail(props: { params: { country: string } }) {
+  // Extraemos los props del componente
   const { params: { country } } = props
 
+  // Hacemos fetch de la data y la guardamos, así como los estados (booleanos) de error y loading
   const { data, error, isLoading } = useSWR<Country>(`country${country}`, () => getCountry(country))
 
+
+  // Verificamos si aun se está haciendo fetch de la información, de ser así se muestra el componente <LoadingFallback/>
   if (isLoading)
     return <div className="h-[75vh] flex items-center justify-center overflow-hidden"> <LoadingFallback /> </div>
 
+  // Al terminar, se verifica que se tiene contenido en la constante data.
   if (data !== undefined) {
-    const { flags: { png, alt }, name: { common, nativeName }, population, region, subregion, capital, tld, currencies, languages, borders } = data
+    const { population, region, subregion, capital, tld, currencies, languages, borders } = data
+    const { png, alt } = data.flags
+    const { common, nativeName } = data.name
 
     let currenciesValues
     const getCurrencies = (currencies: Currencies) => {
@@ -59,7 +65,7 @@ function CountryDetail(props: {
                 <div className="flex-1">
                   <h1 className="text-2xl font-bold mb-6">{common}</h1>
                   <div className="lg:flex lg:justify-between lg:items-center lg:gap-10">
-                    
+
                     <div className="mb-10 lg:mb-0 lg:min-w-[200px]">
                       <p className="my-2"><span className="font-bold">Native Name:</span> {nativeNameCommon}</p>
                       <p className="my-2"><span className="font-bold"> Population:</span> {population}</p>
@@ -76,17 +82,7 @@ function CountryDetail(props: {
                   </div>
                   {
                     borders &&
-                    <>
-                      <h3 className="mt-10 text-xl font-semibold">Border Countries:</h3>
-                      <div className="flex items-center justify-center flex-wrap gap-2 my-3">
-                        {borders.map(country =>
-                          <span key={country}
-                            className="text-sm bg-c-white dark:bg-c-dark-blue-elements dark:border-0 py-1 px-10 shadow-center border rounded-md lowercase first-letter:uppercase">
-                            {country}
-                          </span>
-                        )}
-                      </div>
-                    </>
+                    <BorderCountries country={common} borders={borders} />
                   }
                 </div>
               </div>
@@ -95,9 +91,17 @@ function CountryDetail(props: {
         }
       </>
     )
-  } else if (error) {
-    return <div>
-      This country was not found
+  } else {
+    return <div className="h-screen absolute -z-50 inset-0 flex flex-col gap-10 items-center justify-center overflow-hidden mx-5">
+      <h1 className="text-3xl text-center font-bold dark:text-c-white">
+        This country was not found
+      </h1>
+      <p className="max-w-[500px] text-center dark:text-c-white">
+        Maybe it's in a parallel dimension or it has turned into a secret country only accessible to the boldest adventurers.
+      </p>
+      <img src="/hidden-country.webp" alt="County not found"
+        className=" relative w-[300px] h-[140px] object-cover -scale-100 dark:invert"
+      />
     </div>
   }
 }
