@@ -13,7 +13,7 @@ function CountryDetail(props: { params: { country: string } }) {
   const { params: { country } } = props
 
   // Hacemos fetch de la data y la guardamos, así como los estados (booleanos) de error y loading
-  const { data, error, isLoading } = useSWR<Country>(`country${country}`, () => getCountry(country))
+  const { data, isLoading } = useSWR<Country>(`country${country}`, () => getCountry(country))
 
 
   // Verificamos si aun se está haciendo fetch de la información, de ser así se muestra el componente <LoadingFallback/>

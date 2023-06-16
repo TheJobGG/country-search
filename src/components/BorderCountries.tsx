@@ -11,7 +11,7 @@ function BorderCountries(props: { country: any, borders: string[] }) {
   if (!borders) return;
 
 
-  const { data: borderInfo, error: borderError, isLoading: loadingBorderCountries } = useSWR<Country[]>(`border_countries_${country}`, () => getCountriesByCode(borders))
+  const { data: borderInfo } = useSWR<Country[]>(`border_countries_${country}`, () => getCountriesByCode(borders))
 
   if (!borderInfo) return
 
