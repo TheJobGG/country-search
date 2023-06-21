@@ -8,6 +8,7 @@ import CountryCard from "../components/CountryCard";
 import { IconSearch } from "../components/Icons";
 import DropDown from "../components/DropDown";
 import LoadingFallback from "../components/LoadingFallback";
+import CountryNotFound from "../components/CountryNotFound";
 
 function Countries() {
   const [searchInput, setSearchInput] = useState("")
@@ -60,7 +61,7 @@ function Countries() {
       </div>
       {
         filteredCountries && filteredCountries.length <= 0 &&
-        <p className="text-center text-lg font-bold mt-10">Country not found</p>
+        <CountryNotFound />
       }
       {
         error && <h2>Something went wrong...</h2>
