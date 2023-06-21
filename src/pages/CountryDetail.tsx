@@ -62,7 +62,7 @@ function CountryDetail(props: { params: { country: string } }) {
 
               <div className="lg:flex lg:items-center lg:gap-20 dark:text-c-white ">
                 <LazyLoadImage src={png} alt={alt ? alt : `${common}' flag`}
-                  className="my-14 w-[350px] h-[300px] lg:w-[300px] lg:h-[300px] xl:w-[500px] xl:h-[400px] lg:object-contain lg:object-left flex-1" />
+                  className="my-14 w-[350px] h-[300px] lg:w-[300px] lg:h-[300px] xl:w-[500px] xl:h-[400px] object-contain lg:object-left flex-1" />
                 <div className="flex-1">
                   <h1 className="text-2xl font-bold mb-6">{common}</h1>
                   <div className="lg:flex lg:justify-between lg:items-center lg:gap-10">
@@ -93,7 +93,9 @@ function CountryDetail(props: { params: { country: string } }) {
       </>
     )
   } else {
-    return <CountryNotFound />
+    return <div className="grid h-[75vh] place-content-center">
+      <CountryNotFound />
+    </div>
   }
 }
 
