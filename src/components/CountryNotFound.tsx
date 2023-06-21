@@ -1,6 +1,6 @@
 function CountryNotFound() {
   return (
-    <div className="h-screen absolute -z-50 inset-0 flex flex-col gap-10 items-center justify-center overflow-hidden mx-5" >
+    <div className="-z-50 flex flex-col gap-10 items-center justify-center overflow-hidden mx-5" >
       <h1 className="text-3xl text-center font-bold dark:text-c-white" >
         This country was not found
       </h1>
