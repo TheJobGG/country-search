@@ -22,7 +22,7 @@ function Header() {
     <div className="py-7 px-10 sm:px-12 lg:px-20 
     bg-white shadow-header dark:bg-c-dark-blue-elements text-c-very-dark-blue-text dark:text-c-very-light-gray-bg "
     >
-      <div className="container flex justify-between">
+      <div className="container flex justify-between gap-x-5">
         <Link href='/'> <h1 className="font-bold">Where in the world?</h1> </Link>
         <button onClick={toggleDarkMode} className="flex  items-center gap-4">
           {
